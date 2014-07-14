@@ -118,6 +118,8 @@ include("header.php");
                 font-size: 16px;
 
             }
+
+
         </style>
 	</head>
 	<body>
@@ -156,7 +158,7 @@ include("header.php");
 
                 <label>Type</label>
 
-                <select class="dropdown2" id = "typeselect" name="type">
+                <select class="dropdown2" id = "typeselect" name="type" style="width:320px">
                     <?php for($i = 0; $i < count($type); $i++) { ?>
                         <?php if($action === 'populate_edit') { ?>
 
@@ -168,9 +170,9 @@ include("header.php");
                 </select>
 
                 <br/>
-                <label>Title</label>
+                <label style="margin-right: 5px;">Title</label>
 
-                <select class="dropdown2" id = "titleselect" name="title">
+                <select class="dropdown2" id = "titleselect" name="title" style="width:320px">
                     <?php for($i = 0; $i < count($titles); $i++) { ?>
                         <?php if($action === 'populate_edit') { ?>
 
@@ -180,8 +182,12 @@ include("header.php");
                     <?php } ?>
                     <option value="1" >Other</option>
                 </select>
+
+
                 <div id = "titlediv">  <input type="text" id="titletextbox" name="titletextbox" />  </div>
+
                 <br/>
+
                 <h2>Describe Your Experience</h2>
                 <textarea class="questions" rows="4" name="content" ><?php if($action==='populate_edit') { echo $sp_experience['content']; } ?></textarea>
                 <input type="hidden" name="action" value="<?php
