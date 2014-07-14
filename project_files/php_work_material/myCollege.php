@@ -148,7 +148,7 @@ include "header.php";
                 <div id = "hiddendiv4">  <input type="text" class="othertextbox" />  </div>
 				<br>
 				<label>Major 1</label>
-				<select class="dropdown2" id = "major1">
+				<select class="dropdown2" id = "major1" style= "width:180px">
                     <?php for($i = 0; $i < count($majors); $i++) { ?>
                         <?php if($action === 'populate_edit') { ?>
                             <option <?php if($sp_major1 == $majors[$i] ) { ?> selected <?php } ?>><?php echo $majors[$i] ?></option>
@@ -158,21 +158,21 @@ include "header.php";
                 </select>
 
 				<label>Major 2</label>
-				<select class="dropdown2" id = "major2">
+				<select class="dropdown2" id = "major2" style= "width:180px">
                     <?php for($i = 0; $i < count($majors); $i++) { ?>
                         <?php if($action === 'populate_edit') { ?>
                             <option <?php if($sp_major2 == $majors[$i] ) { ?> selected <?php } ?>><?php echo $majors[$i] ?></option>
                         <?php }else { ?> <option><?php echo $majors[$i] ?> <?php } ?></option>
                     <?php } ?>
                     <option <?php if($sp_major2 === "none") { ?>  selected <?php } ?>>none</option> ?>
-                    <option value = "1" class = ".textexp"> Other </option>
+                    <option value = "1" class = ".textexp" style= "width:180px"> Other </option>
                 </select>
                 <div id = "majordiv1" >  <input type="text" id="majorothertextbox" />  </div>
                 <div id = "majordiv2">  <input type="text" id="majorothertextbox2" />  </div>
 				<br>
 
 				<label>Minor 1</label>
-				<select class="dropdown2" id = "minor1">
+				<select class="dropdown2" id = "minor1" style= "width:180px">
                     <?php for($i = 0; $i < count($minors); $i++) { ?>
                         <?php if($action === 'populate_edit') { ?>
                             <option <?php if($sp_minor1 == $minors[$i] ) { ?> selected <?php } ?>><?php echo $minors[$i] ?></option>
@@ -184,7 +184,7 @@ include "header.php";
 
 
                 <label>Minor 2</label>
-				<select class="dropdown2" id = "minor2">
+				<select class="dropdown2" id = "minor2" style= "width:180px">
                     <?php for($i = 0; $i < count($minors); $i++) { ?>
                         <?php if($action === 'populate_edit') { ?>
                             <option <?php if($sp_minor2 === $minors[$i] ) { ?> selected <?php } ?>><?php echo $minors[$i] ?></option>
