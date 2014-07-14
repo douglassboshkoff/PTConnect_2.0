@@ -141,9 +141,7 @@ include "header.php";
 
                             <option><?php echo $college1['name'] ?></option>
                     <?php } ?>
-
                     <option value = "1" class = ".textexp"> Other </option>
-
                 </select>
                 <?php } ?>
                 <div id = "hiddendiv">   <input type="text" class="othertextbox" />  </div>
@@ -151,7 +149,7 @@ include "header.php";
                 <div id = "hiddendiv3">  <input type="text" class="othertextbox" />  </div>
                 <div id = "hiddendiv4">  <input type="text" class="othertextbox" />  </div>
 				<br>
-				<label style="margin-right: 2px;">Major 1</label>
+				<label>Major 1</label>
 				<select class="dropdown2" id = "major1" style= "width:180px">
                     <?php for($i = 0; $i < count($majors); $i++) { ?>
                         <?php if($action === 'populate_edit') { ?>
@@ -161,7 +159,7 @@ include "header.php";
                     <option value = "1" class = ".textexp"> Other </option>
                 </select>
 
-				<label style="margin-left: 2px;">Major 2</label>
+				<label>Major 2</label>
 				<select class="dropdown2" id = "major2" style= "width:180px">
                     <?php for($i = 0; $i < count($majors); $i++) { ?>
                         <?php if($action === 'populate_edit') { ?>
@@ -175,7 +173,7 @@ include "header.php";
                 <div id = "majordiv2">  <input type="text" id="majorothertextbox2" />  </div>
 				<br>
 
-				<label style="margin-right: 1px;">Minor 1</label>
+				<label>Minor 1</label>
 				<select class="dropdown2" id = "minor1" style= "width:180px">
                     <?php for($i = 0; $i < count($minors); $i++) { ?>
                         <?php if($action === 'populate_edit') { ?>
@@ -187,7 +185,7 @@ include "header.php";
                 </select>
 
 
-                <label style="margin-left: 2px;">Minor 2</label>
+                <label>Minor 2</label>
 				<select class="dropdown2" id = "minor2" style= "width:180px">
                     <?php for($i = 0; $i < count($minors); $i++) { ?>
                         <?php if($action === 'populate_edit') { ?>
