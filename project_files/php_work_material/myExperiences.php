@@ -193,7 +193,7 @@ include("header.php");
                     echo 'edit';
                 }
                 ?>">
-                <input type="submit" id="addButton" value="submit" style="text-decoration: none"/>
+                <input type="submit" id="addButton" value="submit"/>
                 <?php if($action==='populate_edit') { ?>
                     <input type="hidden" name="id" value="<?php echo $sp_experience['id'] ?>"/>
                 <?php } ?>
