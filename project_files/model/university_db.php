@@ -60,6 +60,13 @@ function get_college_name($collegeID){
     return $name;
 }
 
+function get_college_by_name($college_name)
+{
+    global $db;
+    $query = "Select id from universities where name = '$college_name'";
+    $college_id = $db->query($query);
+    return $college_id;
+}
 function get_colleges() {
     global $db;
     $query = "SELECT *

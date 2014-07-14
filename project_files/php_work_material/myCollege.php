@@ -61,7 +61,8 @@ else if($action === 'populate_edit')
 }
 else if($action === 'add')
 {
-    $id = $_POST['id'];
+    $accounts_id = $_SESSION['id'];
+    add_concentration($_POST['major1'], 0, $_SESSION['id'],)
 }
 else if($action === 'delete')
 {
@@ -133,10 +134,9 @@ include "header.php";
                 <?php if($action === 'populate_edit') { ?>
                     <input type="text" name="college" value="<?php echo  $sp_college['name']?>" readonly style="margin-left:7px; width: 230px; font-family: 'HelveticaNeue-Thin', 'Helvetica Neue Thin', 'Helvetica Neue', Helvetica, sans-serif; font-size: 16px; padding: 2px 0 2px 8px;"/>
                 <?php }else{ ?>
-				<select class="dropdown2" id="college2">
+				<select class="dropdown2" id="college2" name = "college_name">
                     <?php $colleges = get_colleges(); ?>
                         <?php  foreach($colleges as $college1) { ?>
-
                             <option><?php echo $college1['name'] ?></option>
                     <?php } ?>
                     <option value = "1" class = ".textexp"> Other </option>

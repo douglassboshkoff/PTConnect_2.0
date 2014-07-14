@@ -53,9 +53,9 @@ function get_minors() {
     return $result->fetchAll(PDO::FETCH_COLUMN,0);
 }
 
-function add_concentration($name, $major_minor) {
+function add_concentration($name, $major_minor, $accounts_id, $universities_id) {
     global $db;
-    $query = "INSERT INTO concentration (name, major_minor) VALUES ('$name', '$major_minor')";
+    $query = "INSERT INTO concentration (name, major_minor, accounts_id, universities_id) VALUES ('$name', '$major_minor', '$accounts_id', '$universities_id')";
     $db->exec($query);
     //useable but not finished, needs editing to add in accounts_id and univiersities_id
 }
