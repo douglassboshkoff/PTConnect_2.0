@@ -53,10 +53,10 @@ $account = get_user_by_id($userID)->fetch();
                 <input name="fname" id="fname" type="text" value="<?php echo $account['first_name']?>"/>
                 <input name="lname" id="lname" type="text" value="<?php echo $account['last_name']?>"/>
                 </br></br>
-                <label>Email</label>
+                <label style="padding-right: 84px;">Email</label>
                 <input name="email" id="email" type="text" value="<?php echo $account['email'] ?>"/>
                 </br></br>
-                <label>Password</label>
+                <label style="padding-right: 45px;">Password</label>
                 <input name="password" id="password" type="password" value="<?php echo $account['password'] ?>"/>
                 </br></br>
                 <label>PT Grad Year</label>
@@ -69,7 +69,7 @@ $account = get_user_by_id($userID)->fetch();
                     <?php endfor ; ?>
                 </select>
                 </br></br></br>
-                <label>Bio</label><textarea name = "bio" id="bioEdit" rows="6"><?php echo $account['bio']?></textarea></br>
+                <label style="padding-right: 102px;">Bio</label><textarea name = "bio" id="bioEdit" rows="6"><?php echo $account['bio']?></textarea></br>
                 <input name="go" type="hidden" value="1">
                 <input id="saveButton" type="submit" value="Save" /></br></br>
             </form>
