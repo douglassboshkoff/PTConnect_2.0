@@ -150,6 +150,7 @@ include "header.php";
                 <div id = "hiddendiv4">  <input type="text" class="othertextbox" />  </div>
 				<br>
 				<label style="margin-right: 2px;">Major 1</label>
+
 				<select class="dropdown2" id = "major1" style= "width:180px">
                     <?php for($i = 0; $i < count($majors); $i++) { ?>
                         <?php if($action === 'populate_edit') { ?>
@@ -159,7 +160,9 @@ include "header.php";
                     <option value = "1" class = ".textexp"> Other </option>
                 </select>
 
+
 				<label style="margin-left: 2px;">Major 2</label>
+
 				<select class="dropdown2" id = "major2" style= "width:180px">
                     <?php for($i = 0; $i < count($majors); $i++) { ?>
                         <?php if($action === 'populate_edit') { ?>
@@ -174,6 +177,7 @@ include "header.php";
 				<br>
 
 				<label style="margin-right: 1px;">Minor 1</label>
+
 				<select class="dropdown2" id = "minor1" style= "width:180px">
                     <?php for($i = 0; $i < count($minors); $i++) { ?>
                         <?php if($action === 'populate_edit') { ?>
@@ -186,6 +190,7 @@ include "header.php";
 
 
                 <label style="margin-left: 2px;">Minor 2</label>
+
 				<select class="dropdown2" id = "minor2" style= "width:180px">
                     <?php for($i = 0; $i < count($minors); $i++) { ?>
                         <?php if($action === 'populate_edit') { ?>
