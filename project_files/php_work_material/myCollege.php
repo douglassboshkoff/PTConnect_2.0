@@ -62,7 +62,7 @@ else if($action === 'populate_edit')
 else if($action === 'add')
 {
     $accounts_id = $_SESSION['id'];
-    add_concentration($_POST['major1'], 0, $_SESSION['id'],)
+    //add_concentration($_POST['major1'], 0, $_SESSION['id'],)
 }
 else if($action === 'delete')
 {
