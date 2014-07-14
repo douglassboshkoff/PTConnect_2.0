@@ -33,5 +33,10 @@ function update_question($id, $new_response) {
     $query = "UPDATE questions SET response = '$new_response' WHERE id = '$id'";
     $db->exec($query);
 }
+function delete_question_by_account($accounts_id, $university_id) {
+    global $db;
+    $query = "DELETE FROM questions WHERE accounts_id = '$accounts_id' && university_id = $university_id";
+    $db->exec($query);
+}
 
 ?>

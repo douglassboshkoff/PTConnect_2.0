@@ -95,7 +95,7 @@ function get_name($id) {
 
 function get_college_by_user($id) {
     global $db;
-    $query = "SELECT name FROM universities
+    $query = "SELECT distinct name, universities.id FROM universities
     INNER JOIN questions
     ON questions.university_id = universities.id
     WHERE questions.accounts_id = '$id'";

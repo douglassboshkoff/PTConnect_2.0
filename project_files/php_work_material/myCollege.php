@@ -20,15 +20,14 @@ else
 }
 
 
-
     $sp_minor1 = "none";
     $sp_minor2 = "none";
     $sp_major2 = "none";
 
 
-if($action==='display')
+if($action === 'display')
 {
-        $colleges = get_colleges();
+        $colleges = get_college_by_user($_SESSION['id']);
 }
 else if($action === 'edit')
 {
@@ -66,8 +65,8 @@ else if($action === 'add')
 }
 else if($action === 'delete')
 {
-    $id = $_POST['id'];
-    remove_college($id);
+    $college_id = $_POST['id'];
+    delete_question_by_account($SESSION['id'], $college_id);
     $colleges = get_colleges();
     $action = 'display';
 }
