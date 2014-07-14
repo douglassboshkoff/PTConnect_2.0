@@ -104,10 +104,9 @@ include "header.php";
     	<div id='wrapper2'>
 		<div id='table'>
 			<table>
-                <?php  foreach($colleges as $college) { ?>
+                <?php foreach($colleges as $college) { ?>
                     <tr>
                         <td><h1><?php echo $college['name']; ?></h1></td>
-                        
                         <td>
                             <form action="myCollege.php" method="post">
                                 <input type="hidden" value="populate_edit" name="action"/>
