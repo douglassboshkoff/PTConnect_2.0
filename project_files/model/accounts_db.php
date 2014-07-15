@@ -167,6 +167,15 @@ function accounts_filter($university, $year, $major, $type, $title) {
     return $result;
 }
 
+function get_image_source($id){
+    global $db;
+    $query = "select image_link from accounts where id = '$id'";
+    $res = $db->query($query)->fetch();
+
+    return $res;
+}
+
+
 
 //will not work until the column is added to the database by Ruben
 function  add_image($image_link, $id) {

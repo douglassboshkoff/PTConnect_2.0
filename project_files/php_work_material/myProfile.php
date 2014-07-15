@@ -75,7 +75,7 @@ $account = get_user_by_id($userID)->fetch();
             </form>
         </div>
         <div id="upload">
-            <img src="matthew.png.jpg"/><br>
+            <img src="<?php echo $_SESSION['linkerino']?>"/><br>
             <button>Upload</button>
         </div>
     </div>

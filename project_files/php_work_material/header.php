@@ -21,7 +21,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
         <?php if(isset($_SESSION['id'])) { ?>
         <li><span id="white">PT</span><span id="red">Connect</span></li>
-        <img src="matthew.png.jpg" />
+        <img src="<?php echo $_SESSION['linkerino'] ?>" />
         <a href="index.php">Logout</a>
         <?php }else { ?>
         <li><a href="main.php" style="text-decoration: none; font-size:32px; "><span id="white">PT</span><span id="red">Connect</span></a></li>

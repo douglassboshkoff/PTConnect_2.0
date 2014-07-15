@@ -1,6 +1,7 @@
 <?php
 include_once "../model/database.php";
 include_once "../model/accounts_db.php";
+
 $error=false;
 
 if (session_status() == PHP_SESSION_NONE) {
@@ -24,6 +25,7 @@ if($action == 'login')
     if(validate_password($email, $password) === true){
         $temp = get_id_by_email($email);
         $_SESSION['id'] = $temp['id'];
+        $_SESSION['linkerino'] = get_image_source($_SESSION['id'])['image_link'];
         include('main.php');
     }
     else {

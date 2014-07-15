@@ -100,7 +100,7 @@ if(isset($_GET['userID'])){
             <?php $user_comment = "" ?>
             <?php foreach($comment_arr as $comment){ ?>
                 <?php if($comment['response'] != $user_comment) { ?>
-                <img src="matthew.png.jpg"/><p><?php echo $comment['response']; ?></p>
+                <img src="../images/profile/matthew.jpg"/><p><?php echo $comment['response']; ?></p>
             <?php }} ?>
         </div>
     </div>
