@@ -4,6 +4,7 @@ include "../model/database.php";
 include "../model/accounts_db.php";
 include "../model/university_db.php";
 include "../model/concentration_db.php";
+include "../model/questions_db.php";
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -62,30 +63,32 @@ else if($action === 'populate_edit')
 else if($action === 'add')
 {
     $accounts_id = $_SESSION['id'];
-    $sp_college = $_POST['college_choice'];
-    add_concentration($_POST['major1'], 0, $_SESSION['id'],$sp_college['id']);
+    $sp_college_id = $_POST['college_choice'];
+    add_concentration($_POST['major1'], 0, $_SESSION['id'],$sp_college_id);
     if($_POST['major2'] != 'none')
     {
-        add_concentration($_POST['major2'],0,$_SESSION['id'],$sp_college['id']);
+        add_concentration($_POST['major2'],0,$_SESSION['id'],$sp_college_id);
     }
     if($_POST['minor1'] != 'none')
     {
-        add_concentration($_POST['minor1'],0,$_SESSION['id'],$sp_college['id']);
+        add_concentration($_POST['minor1'],0,$_SESSION['id'],$sp_college_id);
     }
     if($_POST['minor2'] != 'none')
     {
-        add_concentration($_POST['minor2'],0,$_SESSION['id'],$sp_college['id']);
+        add_concentration($_POST['minor2'],0,$_SESSION['id'],$sp_college_id);
     }
-    add_question($_POST['question1'],$sp_college['id'],$_SESSION['id']);
-    add_question($_POST['question2'],$sp_college['id'],$_SESSION['id']);
-    add_question($_POST['question3'],$sp_college['id'],$_SESSION['id']);
+    add_question($_POST['question1'],$sp_college_id,$_SESSION['id']);
+    add_question($_POST['question2'],$sp_college_id,$_SESSION['id']);
+    add_question($_POST['question3'],$sp_college_id,$_SESSION['id']);
     $action='display';
+    $colleges = get_college_by_user($_SESSION['id']);
+
 }
 else if($action === 'delete')
 {
     $college_id = $_POST['id'];
     delete_question_by_account($SESSION['id'], $college_id);
-    $colleges = get_colleges();
+    $colleges = get_college_by_user($_SESSION['id']);
     $action = 'display';
 }
 include "header.php";
@@ -149,12 +152,12 @@ include "header.php";
 			<form method="post" action="myCollege.php">
 				<label>School</label>
                 <?php if($action === 'populate_edit') { ?>
-                    <input type="text" name="college" value="<?php echo  $sp_college['name']?>" readonly style="margin-left:7px; width: 230px; font-family: 'HelveticaNeue-Thin', 'Helvetica Neue Thin', 'Helvetica Neue', Helvetica, sans-serif; font-size: 16px; padding: 2px 0 2px 8px;"/>
+                    <input type="text" name="college" value="<?php echo  $sp_college['name']?>" style="margin-left:7px; width: 230px; font-family: 'HelveticaNeue-Thin', 'Helvetica Neue Thin', 'Helvetica Neue', Helvetica, sans-serif; font-size: 16px; padding: 2px 0 2px 8px;"/>
                 <?php }else{ ?>
-				<select class="dropdown2" id="college2" name = "college_choice">
+				<select class="dropdown2" id="college2" name ="college_choice">
                     <?php $colleges = get_colleges(); ?>
                         <?php  foreach($colleges as $college1) { ?>
-                            <option value="<?php $college1 ?>"><?php echo $college1['name'] ?></option>
+                            <option value="<?php echo $college1['id'] ?>"><?php echo $college1['name'] ?></option>
                     <?php } ?>
 
                     <option value = "1" class = ".textexp"> Other </option>
@@ -168,7 +171,7 @@ include "header.php";
 				<br>
 				<label style="margin-right: 2px;">Major 1</label>
 
-				<select class="dropdown2" id = "major1" style= "width:180px">
+				<select class="dropdown2" name="major1" id = "major1" style= "width:180px">
                     <?php for($i = 0; $i < count($majors); $i++) { ?>
                         <?php if($action === 'populate_edit') { ?>
                             <option <?php if($sp_major1 == $majors[$i] ) { ?> selected <?php } ?>><?php echo $majors[$i] ?></option>
@@ -180,7 +183,7 @@ include "header.php";
 
 				<label style="margin-left: 2px;">Major 2</label>
 
-				<select class="dropdown2" id = "major2" style= "width:180px">
+				<select class="dropdown2" name="major2" id = "major2" style= "width:180px">
                     <?php for($i = 0; $i < count($majors); $i++) { ?>
                         <?php if($action === 'populate_edit') { ?>
                             <option <?php if($sp_major2 == $majors[$i] ) { ?> selected <?php } ?>><?php echo $majors[$i] ?></option>
@@ -195,7 +198,7 @@ include "header.php";
 
 				<label style="margin-right: 1px;">Minor 1</label>
 
-				<select class="dropdown2" id = "minor1" style= "width:180px">
+				<select class="dropdown2" name="minor1" id = "minor1" style= "width:180px">
                     <?php for($i = 0; $i < count($minors); $i++) { ?>
                         <?php if($action === 'populate_edit') { ?>
                             <option <?php if($sp_minor1 == $minors[$i] ) { ?> selected <?php } ?>><?php echo $minors[$i] ?></option>
@@ -208,7 +211,7 @@ include "header.php";
 
                 <label style="margin-left: 2px;">Minor 2</label>
 
-				<select class="dropdown2" id = "minor2" style= "width:180px">
+				<select class="dropdown2" name="minor2" id = "minor2" style= "width:180px">
                     <?php for($i = 0; $i < count($minors); $i++) { ?>
                         <?php if($action === 'populate_edit') { ?>
                             <option <?php if($sp_minor2 === $minors[$i] ) { ?> selected <?php } ?>><?php echo $minors[$i] ?></option>

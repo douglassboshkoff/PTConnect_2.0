@@ -7,11 +7,6 @@ include "../model/database.php";
 include "header.php";
 
 
-//test array
-$arr = array("goin?", "ggg", "dwwer", "dwwer", "dwwer", "dwwer", "dwwer", "hello","world","how's","it","goin?", "ggg", "dwwer", "dwwer", "dwwer", "dwwer", "dwwer", "dwwer", "dwwer", "dwwer", "geree", "aerffds", "wefds", "dwwer", "dwwer", "dwwer", "dwwer", "dwwer", "dwwer","goin?", "ggg", "dwwer", "dwwer", "dwwer", "dwwer", "dwwer");
-
-// temporary value
-$collegeID = "Tom Ato";
 $class = 2015;
 
 if(isset($_POST['name'])){
