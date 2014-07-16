@@ -16,9 +16,9 @@ function get_questions($collegeID, $questionID) {
 }
 
 
-function add_question($question_id, $response, $university_id, $accounts_id) {
+function add_question($response, $university_id, $accounts_id) {
     global $db;
-    $query = "INSERT INTO questions (question_id, response, university_id, accounts_id) VALUES ('$question_id','$response','$university_id','$accounts_id')";
+    $query = "INSERT INTO questions (response, university_id, accounts_id) VALUES ('$response','$university_id','$accounts_id')";
     $db->exec($query);
 }
 

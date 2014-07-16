@@ -35,10 +35,10 @@ else if($action === 'edit')
 }
 else if($action === 'populate_edit')
 {
-    $id = $_POST['id'];
+    $university_id = $_POST['university_id'];
     $sp_college = get_specific_college($id)->fetch();
-    $sp_major =  get_sp_major($id, $_SESSION['id']);
-    $sp_minor = get_sp_minor($id, $_SESSION['id']);
+    $sp_major =  get_sp_major($university_id, $_SESSION['id']);
+    $sp_minor = get_sp_minor($university_id, $_SESSION['id']);
     if(count($sp_major) == 2)
     {
         $sp_major1 = $sp_major[0];
@@ -57,12 +57,29 @@ else if($action === 'populate_edit')
     else if(count($sp_minor) == 1){
         $sp_minor1 = $sp_minor[0];
     }
-    $colleges = get_colleges();
+    $colleges = get_college_by_user($_SESSION['id']);
 }
 else if($action === 'add')
 {
     $accounts_id = $_SESSION['id'];
-    //add_concentration($_POST['major1'], 0, $_SESSION['id'],)
+    $sp_college = $_POST['college_choice'];
+    add_concentration($_POST['major1'], 0, $_SESSION['id'],$sp_college['id']);
+    if($_POST['major2'] != 'none')
+    {
+        add_concentration($_POST['major2'],0,$_SESSION['id'],$sp_college['id']);
+    }
+    if($_POST['minor1'] != 'none')
+    {
+        add_concentration($_POST['minor1'],0,$_SESSION['id'],$sp_college['id']);
+    }
+    if($_POST['minor2'] != 'none')
+    {
+        add_concentration($_POST['minor2'],0,$_SESSION['id'],$sp_college['id']);
+    }
+    add_question($_POST['question1'],$sp_college['id'],$_SESSION['id']);
+    add_question($_POST['question2'],$sp_college['id'],$_SESSION['id']);
+    add_question($_POST['question3'],$sp_college['id'],$_SESSION['id']);
+    $action='display';
 }
 else if($action === 'delete')
 {
@@ -110,7 +127,7 @@ include "header.php";
                         <td>
                             <form action="myCollege.php" method="post">
                                 <input type="hidden" value="populate_edit" name="action"/>
-                                <input type="hidden" value="<?php echo $college['id'] ?>" name="id"/>
+                                <input type="hidden" value="<?php echo $college['id'] ?>" name="university_id"/>
                                 <input id="submitLink" type="submit" value="edit" name="submit"/>
                                 <input type="hidden" value="college" name="page"/>
                             </form>
@@ -118,7 +135,7 @@ include "header.php";
                         <td>
                             <form action="myCollege.php" method="post">
                                 <input id="submitLink" type="submit" value="delete" name="submit"/>
-                                <input type="hidden" value="<?php echo $college['id'] ?>" name="id"/>
+                                <input type="hidden" value="<?php echo $college['id'] ?>" name="university_id"/>
                                 <input type="hidden" value="delete" name="action"/>
                                 <input type="hidden" value="college" name="page"/>
                             </form>
@@ -134,10 +151,10 @@ include "header.php";
                 <?php if($action === 'populate_edit') { ?>
                     <input type="text" name="college" value="<?php echo  $sp_college['name']?>" readonly style="margin-left:7px; width: 230px; font-family: 'HelveticaNeue-Thin', 'Helvetica Neue Thin', 'Helvetica Neue', Helvetica, sans-serif; font-size: 16px; padding: 2px 0 2px 8px;"/>
                 <?php }else{ ?>
-				<select class="dropdown2" id="college2" name = "college_name">
+				<select class="dropdown2" id="college2" name = "college_choice">
                     <?php $colleges = get_colleges(); ?>
                         <?php  foreach($colleges as $college1) { ?>
-                            <option><?php echo $college1['name'] ?></option>
+                            <option value="<?php $college1 ?>"><?php echo $college1['name'] ?></option>
                     <?php } ?>
 
                     <option value = "1" class = ".textexp"> Other </option>
