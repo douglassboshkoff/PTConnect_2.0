@@ -199,6 +199,13 @@ function get_email_by_id($id)
     return $result;
 }
 
+function get_password_by_email($email) {
+    global $db;
+    $query = "SELECT password FROM accounts WHERE email = '$email'";
+    $result = $db->query($query)->fetch()[0];
+    return $result;
+}
+
 function update_user($id, $fname, $lname, $email, $password, $gradyear, $bio){
     global $db;
     $query = "UPDATE accounts
