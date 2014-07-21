@@ -5,12 +5,13 @@ include "../model/accounts_db.php";
 include "../model/university_db.php";
 include "../model/concentration_db.php";
 include "../model/questions_db.php";
+include "../model/queries_db.php";
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 $majors = get_majors();
 $minors = get_minors();
-
+$queries = get_queries();
 if(isset($_POST['action']))
 {
     $action = $_POST['action'];
@@ -37,9 +38,14 @@ else if($action === 'edit')
 else if($action === 'populate_edit')
 {
     $university_id = $_POST['university_id'];
-    $sp_college = get_specific_college($id)->fetch();
+    $sp_college = get_specific_college($university_id)->fetch();
     $sp_major =  get_sp_major($university_id, $_SESSION['id']);
     $sp_minor = get_sp_minor($university_id, $_SESSION['id']);
+    $questions = get_questions($university_id, $_SESSION['id']);
+    foreach($questions as $question)
+    {
+        echo $question;
+    }
     if(count($sp_major) == 2)
     {
         $sp_major1 = $sp_major[0];
@@ -77,17 +83,20 @@ else if($action === 'add')
     {
         add_concentration($_POST['minor2'],0,$_SESSION['id'],$sp_college_id);
     }
-    add_question($_POST['question1'],$sp_college_id,$_SESSION['id']);
-    add_question($_POST['question2'],$sp_college_id,$_SESSION['id']);
-    add_question($_POST['question3'],$sp_college_id,$_SESSION['id']);
+    add_question($_POST['question1'],$sp_college_id,$_SESSION['id'],1);
+    add_question($_POST['question2'],$sp_college_id,$_SESSION['id'],2);
+    add_question($_POST['question3'],$sp_college_id,$_SESSION['id'],3);
+    add_question($_POST['question3'],$sp_college_id,$_SESSION['id'],4);
+    add_question($_POST['question3'],$sp_college_id,$_SESSION['id'],5);
     $action='display';
     $colleges = get_college_by_user($_SESSION['id']);
 
 }
 else if($action === 'delete')
 {
-    $college_id = $_POST['id'];
-    delete_question_by_account($SESSION['id'], $college_id);
+    $college_id = $_POST['university_id'];
+    delete_question_by_account($_SESSION['id'], $college_id);
+    remove_concentration_by_user_and_university($_SESSION['id'],$college_id);
     $colleges = get_college_by_user($_SESSION['id']);
     $action = 'display';
 }
@@ -223,13 +232,10 @@ include "header.php";
                 <div id = "minordiv2">  <input type="text" id="minorothertextbox2" />  </div>
                 <div id = "minordiv1">  <input type="text" id="minorothertextbox" />  </div>
 
-
-                <h2>What made you choose this college?</h2>
-				<textarea class="questions" rows="4" name="question1"></textarea>
-				<h2>What is the single most unique attribute of this college?</h2>
-				<textarea class="questions" rows="4" name="question2"></textarea>
-				<h2>What will your degree from this college help you accomplish?</h2>
-				<textarea class="questions" rows="4" name="question3"></textarea>
+                <?php foreach($queries as $query) { ?>
+                    <h2><?php echo $query['question']; ?></h2>
+				    <textarea class="questions" rows="4" name="question<?php echo $query['id']; ?>"><?php if($action === 'populate_edit') { echo $questions[$query['id'] - 1]; }?></textarea>
+				<?php } ?>
                 <input type="hidden" name="action" value="<?php
                 if($action === 'display')
                 {

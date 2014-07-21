@@ -7,18 +7,18 @@ function get_question($userID, $collegeID, $questionID) {
     return $response;
 }
 
-function get_questions($collegeID, $questionID) {
+function get_questions($universityID, $accountID) {
     global $db;
-    $query = "SELECT * FROM questions
-	      WHERE question_id = '$questionID' AND university_id = '$collegeID'";
-    $response = $db->query($query);
+    $query = "SELECT response FROM questions
+	      WHERE accounts_id = '$accountID' AND university_id = '$universityID' ORDER BY queries_id";
+    $response = $db->query($query)->fetchAll(PDO::FETCH_COLUMN,0);;
     return $response;
 }
 
 
-function add_question($response, $university_id, $accounts_id) {
+function add_question($response, $university_id, $accounts_id, $query_id) {
     global $db;
-    $query = "INSERT INTO questions (response, university_id, accounts_id) VALUES ('$response','$university_id','$accounts_id')";
+    $query = "INSERT INTO questions (response, university_id, accounts_id, queries_id) VALUES ('$response','$university_id','$accounts_id', '$query_id')";
     $db->exec($query);
 }
 

@@ -1,5 +1,6 @@
 <?php
     include('../model/accounts_db.php');
+    include('../model/database.php');
 ?>
 
 <html>

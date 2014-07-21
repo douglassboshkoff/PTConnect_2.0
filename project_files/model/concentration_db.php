@@ -66,6 +66,12 @@ function remove_concentration($id) {
     $db->exec($query);
 }
 
+function remove_concentration_by_user_and_university($account_id, $university_id) {
+    global $db;
+    $query = "DELETE FROM concentration WHERE accounts_id = '$account_id' AND universities_id = '$university_id'";
+    $db->exec($query);
+}
+
 function update_concentration($id, $name, $major_minor, $universities_id, $accounts_id) {
     global $db;
     $query = "UPDATE concentrations SET name = '$name', major_minor = '$major_minor', universities_id = '$universities_id', accounts_id = '$accounts_id'
