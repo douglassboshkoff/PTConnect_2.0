@@ -6,6 +6,7 @@ if(isset($_SESSION['id']))
 }
 include("../model/database.php");
 include("../model/queries_db.php");
+include("../model/accounts_db.php");
 include("../model/questions_db.php");
 include("../model/university_db.php");
 
@@ -87,22 +88,24 @@ if(isset($_GET['userID'])){
         </div>
         <div id="questions">
             <a href = "college.php?next=-1&pageNum=<?php echo $pageNum; ?><?php if(isset($userID)){ echo "&userID=" . $userID;}?>">
-            <button id="prev">Previous</button>
-                </a>
+                <button id="prev">Previous</button>
+            </a>
             <a href = "college.php?next=1&pageNum=<?php echo $pageNum; ?><?php if(isset($userID)){ echo "&userID=" . $userID;}?>">
 
-            <button id="next">Next</button>
-                </a>
+                <button id="next">Next</button>
+            </a>
             <h1> <?php echo $arr[$pageNum]['question']; ?></h1>
             <?php if(isset($user_comment)){ ?>
-            <img src="profile.png"/><p style= "background-color: lightgrey;"><?php echo $user_comment; ?></p>
+                <img src="profile.png"/><p style= "background-color: lightgrey;"><?php echo $user_comment; ?></p>
             <?php } ?>
             <?php $user_comment = "" ?>
             <?php foreach($comment_arr as $comment){ ?>
                 <?php if($comment['response'] != $user_comment) { ?>
-                <?php //this don't work yet ?>
-                <img src="../images/profile/matthew.jpg"/><p><?php echo $comment['response']; ?></p>
-            <?php }} ?>
+                    <?php if(get_image_source($comment['accounts_id']) != NULL) :?>
+                        <?php echo ($comment['accounts_id']); ?>
+                        <img src="<?php get_image_source($comment['accounts_id']) ?>"/><p><?php echo $comment['response']; ?></p>
+                    <?php endif; ?>
+                <?php }} ?>
         </div>
     </div>
 </div>

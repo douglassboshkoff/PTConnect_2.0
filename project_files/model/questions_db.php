@@ -9,9 +9,9 @@ function get_question($userID, $collegeID, $questionID) {
 
 function get_questions($universityID, $accountID) {
     global $db;
-    $query = "SELECT response FROM questions
+    $query = "SELECT * FROM questions
 	      WHERE accounts_id = '$accountID' AND university_id = '$universityID' ORDER BY queries_id";
-    $response = $db->query($query)->fetchAll(PDO::FETCH_COLUMN,0);;
+    $response = $db->query($query)->fetchAll();
     return $response;
 }
 
