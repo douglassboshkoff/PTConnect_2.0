@@ -1,19 +1,19 @@
 <?php
 
-function get_experiences($id) {
+function get_experiences_by_account_id($id) {
     global $db;
     $query = "SELECT * FROM experiences WHERE accounts_id = '$id'";
     $result = $db->query($query);
     return $result;
 }
-//Made by Douglass
+
 function get_specific_experience($id) {
     global $db;
     $query = "SELECT * FROM experiences WHERE id = '$id'";
     $result = $db->query($query);
     return $result;
 }
-//made by Douglass
+
 function delete_experience($id) {
     global $db;
     $query = "Delete FROM experiences WHERE id = '$id'";
@@ -29,7 +29,7 @@ function get_content($id) {
 
 function get_all_titles() {
     global $db;
-    $query = "SELECT distinct title FROM experiences";
+    $query = "SELECT distinct title FROM experiences where title != ''";
     $result = $db->query($query);
     return $result->fetchAll(PDO::FETCH_COLUMN,0);
 

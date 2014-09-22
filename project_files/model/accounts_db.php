@@ -45,9 +45,9 @@ function validate_password($email, $password) {
     $query = "SELECT * FROM accounts WHERE email = '$email'";
     $result = $db->query($query);
     $user = $result->fetch();
-
     $pass = $user['password'];
-    if($password == $pass) {
+
+    if($password == $pass && $password != "") {
         return true;
     }
     else {
