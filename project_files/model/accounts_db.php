@@ -1,9 +1,9 @@
 <?php
 
-function add_user($fname, $lname, $email, $gradYear, $password) {
+function add_user($fname, $lname, $email, $gradYear, $password,$imagelink) {
     global $db;
-    $query = "INSERT INTO accounts( first_name, last_name, email, pt_grad_year, password)
-         VALUES ('$fname', '$lname', '$email', '$gradYear', '$password')";
+    $query = "INSERT INTO accounts( first_name, last_name, email, pt_grad_year, password, image_link)
+         VALUES ('$fname', '$lname', '$email', '$gradYear', '$password', '$imagelink')";
     $db->exec($query);
 }
 

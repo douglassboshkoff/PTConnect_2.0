@@ -20,9 +20,9 @@ if (session_status() == PHP_SESSION_NONE) {
     <ul>
 
         <?php if(isset($_SESSION['id'])) { ?>
-        <li><span id="white">PT</span><span id="red">Connect</span></li>
-        <img src="<?php echo $_SESSION['linkerino'] ?>" />
-        <a href="index.php">Logout</a>
+            <li><span id="white">PT</span><span id="red">Connect</span></li>
+            <a href="index.php">Logout</a>
+            <img src="<?php echo $_SESSION['link'] ?>" />
         <?php }else { ?>
         <li><a href="main.php" style="text-decoration: none; font-size:32px; "><span id="white">PT</span><span id="red">Connect</span></a></li>
         <a href="index.php">Login Page</a>

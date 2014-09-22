@@ -1,11 +1,4 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-if(isset($_SESSION['id']))
-{
-    $_SESSION['id'] = $_SESSION['id'];
-}
 include "../model/accounts_db.php";
 include "../model/university_db.php";
 include "../model/concentration_db.php";
@@ -13,13 +6,7 @@ include "../model/experiences_db.php";
 include "../model/database.php";
 include "header.php";
 
-$arr = array("hello","world","how's","it","goin?", "ggg", "dwwer", "dwwer", "dwwer", "dwwer", "dwwer", "dwwer", "dwwer", "dwwer", "geree", "aerffds", "wefds", "dwwer", "dwwer", "dwwer", "dwwer", "dwwer", "dwwer");
 
-
-// temporary values
-$class = 2015;
-// identification value
-$user_email = "Tom Ato";
 
 $grad_year_array = get_grad_years();
 $college_array = get_colleges();
@@ -161,32 +148,8 @@ $name_array = "";
                 <input type="hidden" name="name" value="<?php echo $name['email']?>">
             </form>
 
-
-
-            <!--<a href="profile.php"><h2><?php echo $name?></h2></a>
-                    -->
             <h3>PT <?php echo $name['pt_grad_year'] ?></h3>
         </div>
-        <!-- add place for action
-                <form action="User_Profilepage.php" method="post">
-                    <input type="hidden" name="userID" value="<?php echo $user_email ?>">
-                    <div class="results">
-                        <div class="top">
-                            <input class="propic" type="image" src="../resources/BlankFace.jpg" alt="Submit">
-                            <!--<img class="propic" src="../resources/BlankFace.jpg">
-                        </div>
-                        <div class="bottom">
-                            <div class="info">
-                                <div class="name">
-                                    <?php echo $name?>
-                                </div>
-                                <div class="class_number">
-                                    <?php echo $class?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form> -->
     <?php endforeach; ?>
 </div>
 </div>

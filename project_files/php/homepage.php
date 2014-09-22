@@ -34,12 +34,12 @@
         <form method="post" action="index.php">
             <input name="action" type="hidden" value="register"/>
 
-            <input id="fname" type="text" placeholder="First Name"/>
-            <input id="lname" type="text" placeholder="Last Name"/>
-            <input id="email" type="text" placeholder="Email"/>
-            <input id="password" type="password" placeholder="Password"/>
-            <input id="password" type="password" placeholder="Verify Password"/>
-            <select id="gradyear">
+            <input id="fname" name="first_name" type="text" placeholder="First Name"/>
+            <input id="lname" name="last_name" type="text" placeholder="Last Name"/>
+            <input id="email" name="email" type="text" placeholder="Email"/>
+            <input id="password" name="password" type="password" placeholder="Password"/>
+            <input id="password" name="verifypassword" type="password" placeholder="Verify Password"/>
+            <select id="gradyear" name="grad_year">
                 <option>PT Grad Year</option>
                 <option>2017</option>
                 <option>2016</option>

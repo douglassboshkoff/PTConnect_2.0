@@ -128,29 +128,9 @@ $secondary_name_array = "";
                     </form>
                     <h3><?php echo $value['location']?></h3>
                 </div>
-                <!-- form stuff
-                <form action="College_Page.php" method="post">
-                    <input type="hidden" name="college_ID" value="<?php echo $collegeID ?>">
-                    <div id="college">
-                        <input class="propic" type="image" src="../resources/College.jpg" alt="Submit">
-
-                        <div class="bottom">
-                            <div class="info">
-                                <div class="name">
-                                    <?php echo $value?>
-                                </div>
-                                <div class="class_number">
-                                    <?php echo $class?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                -->
             <?php endforeach; ?>
         </div>
     </div>
-</div>
 </div>
 </body>
 <?php include "footer.php"; ?>

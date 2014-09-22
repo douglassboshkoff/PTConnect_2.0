@@ -17,7 +17,6 @@ if (isset($_POST['action'])) {
 }
 
 
-
 if($action == 'login')
 {
     $email = $_POST['email'];
@@ -25,7 +24,7 @@ if($action == 'login')
     if(validate_password($email, $password) === true){
         $temp = get_id_by_email($email);
         $_SESSION['id'] = $temp['id'];
-        $_SESSION['linkerino'] = get_image_source($_SESSION['id'])['image_link'];
+        $_SESSION['link'] = get_image($_SESSION['id'])[0];
         include('main.php');
     }
     else {
@@ -40,12 +39,14 @@ else if($action == 'register')
     $email = $_POST['email'];
     $password = $_POST['password'];
     $verifypassword = $_POST['verifypassword'];
-    $pt_grad_year = $_POST['pt_grad_year'];
+    $grad_year = $_POST['grad_year'];
 
-    add_user($first_name, $last_name, $email, $pt_grad_year, $password);
-
-    if($password == $verifypassword)
+    if($password == $verifypassword && $password != "")
     {
+        add_user($first_name, $last_name, $email, $grad_year, $password,"../resources/default_picture.png");
+        $temp = get_id_by_email($email);
+        $_SESSION['id'] = $temp['id'];
+        $_SESSION['link'] = get_image($_SESSION['id'])[0];
         include('main.php');
     }
     else
