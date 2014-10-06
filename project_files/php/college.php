@@ -7,7 +7,7 @@ if(isset($_SESSION['id']))
 include("../model/database.php");
 include("../model/queries_db.php");
 include("../model/accounts_db.php");
-include("../model/questions_db.php");
+include("../model/comments_db.php");
 include("../model/university_db.php");
 
 $collegeID = "";

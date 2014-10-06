@@ -7,7 +7,7 @@
  */
 //include('../validate/fields.php');
 //include('../validate/validate.php');
-include('../model/questions_db.php');
+include('../model/comments_db.php');
 include "../model/accounts_db.php";
 include('../model/experiences_db.php');
 include('../model/database.php');
@@ -58,7 +58,7 @@ if($action==='display')
     else if($page === 'college')
     {
         $colleges = get_colleges();
-        include('mycollege.php');
+        include('myColleges.php');
     }
 }
 else if($action === 'edit')

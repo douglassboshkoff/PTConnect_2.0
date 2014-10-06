@@ -93,16 +93,6 @@ function get_name($id) {
     return $result->fetch();
 }
 
-function get_college_by_user($id) {
-    global $db;
-    $query = "SELECT distinct name, universities.id FROM universities
-    INNER JOIN questions
-    ON questions.university_id = universities.id
-    WHERE questions.accounts_id = '$id'";
-    $result = $db->query($query);
-    return $result;
-}
-
 function accounts_filter($university, $year, $major, $type, $title) {
     //Initial Database Fetch
     global $db;

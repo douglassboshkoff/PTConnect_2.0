@@ -11,7 +11,7 @@ if (session_status() == PHP_SESSION_NONE) {
  */
 //include('../validate/fields.php');
 //include('../validate/validate.php');
-include('../model/questions_db.php');
+include('../model/comments_db.php');
 include "../model/accounts_db.php";
 include('../model/experiences_db.php');
 include('../model/database.php');

@@ -208,4 +208,14 @@ function university_filter($name, $location, $type){
     return $result;
 }
 
+function get_college_by_user($id) {
+    global $db;
+    $query = "SELECT distinct name, universities.id FROM universities
+    INNER JOIN questions
+    ON questions.university_id = universities.id
+    WHERE questions.accounts_id = '$id'";
+    $result = $db->query($query);
+    return $result;
+}
+
 ?>

@@ -4,14 +4,19 @@ include "../model/database.php";
 include "../model/accounts_db.php";
 include "../model/university_db.php";
 include "../model/concentration_db.php";
-include "../model/questions_db.php";
+include "../model/comments_db.php";
 include "../model/queries_db.php";
+/*
+ * Every time I open this file the sadder I get.
+ * I cry every time.
+ */
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 $majors = get_majors();
 $minors = get_minors();
 $queries = get_queries();
+
 if(isset($_POST['action']))
 {
     $action = $_POST['action'];
@@ -70,24 +75,40 @@ else if($action === 'add')
 {
     $accounts_id = $_SESSION['id'];
     $sp_college_id = $_POST['college_choice'];
-    add_concentration($_POST['major1'], 0, $_SESSION['id'],$sp_college_id);
+    $major1 = $_POST['major1'];
+    $major2 = $_POST['major2'];
+    $minor1 = $_POST['minor1'];
+    $minor2 = $_POST['minor2'];
+    if($major1 == 1)
+    {
+
+        add_concentration($_POST['majorothertextbox'], 0, $_SESSION['id'],$sp_college_id);
+    }
     if($_POST['major2'] != 'none')
     {
-        add_concentration($_POST['major2'],0,$_SESSION['id'],$sp_college_id);
+        if($_POST['major2'] == 1)
+        {
+            add_concentration($_POST['major2'],0,$_SESSION['id'],$sp_college_id);
+        }
+        else
+        {
+            add_concentration($_POST['major2'],0,$_SESSION['id'],$sp_college_id);
+        }
     }
     if($_POST['minor1'] != 'none')
     {
-        add_concentration($_POST['minor1'],0,$_SESSION['id'],$sp_college_id);
+        add_concentration($_POST['minor1'],1,$_SESSION['id'],$sp_college_id);
     }
     if($_POST['minor2'] != 'none')
     {
-        add_concentration($_POST['minor2'],0,$_SESSION['id'],$sp_college_id);
+        add_concentration($_POST['minor2'],1,$_SESSION['id'],$sp_college_id);
     }
     add_question($_POST['question1'],$sp_college_id,$_SESSION['id'],1);
     add_question($_POST['question2'],$sp_college_id,$_SESSION['id'],2);
     add_question($_POST['question3'],$sp_college_id,$_SESSION['id'],3);
     add_question($_POST['question3'],$sp_college_id,$_SESSION['id'],4);
     add_question($_POST['question3'],$sp_college_id,$_SESSION['id'],5);
+
     $action='display';
     $colleges = get_college_by_user($_SESSION['id']);
 
@@ -137,7 +158,7 @@ include "header.php";
                     <tr>
                         <td><h1><?php echo $college['name']; ?></h1></td>
                         <td>
-                            <form action="myCollege.php" method="post">
+                            <form action="myColleges.php" method="post">
                                 <input type="hidden" value="populate_edit" name="action"/>
                                 <input type="hidden" value="<?php echo $college['id'] ?>" name="university_id"/>
                                 <input id="submitLink" type="submit" value="edit" name="submit"/>
@@ -145,7 +166,7 @@ include "header.php";
                             </form>
                         </td>
                         <td>
-                            <form action="myCollege.php" method="post">
+                            <form action="myColleges.php" method="post">
                                 <input id="submitLink" type="submit" value="delete" name="submit"/>
                                 <input type="hidden" value="<?php echo $college['id'] ?>" name="university_id"/>
                                 <input type="hidden" value="delete" name="action"/>
@@ -158,7 +179,7 @@ include "header.php";
 		</div>
 		<div id="add">
 			<h1><?php if($action==='display') { echo "Add College";} else { echo "Edit College";} ?></h1>
-			<form method="post" action="myCollege.php">
+			<form method="post" action="myColleges.php">
 				<label>School</label>
                 <?php if($action === 'populate_edit') { ?>
                     <input type="text" name="college" value="<?php echo  $sp_college['name']?>" style="margin-left:7px; width: 230px; font-family: 'HelveticaNeue-Thin', 'Helvetica Neue Thin', 'Helvetica Neue', Helvetica, sans-serif; font-size: 16px; padding: 2px 0 2px 8px;"/>
@@ -173,10 +194,10 @@ include "header.php";
 
                 </select>
                 <?php } ?>
-                <div id = "hiddendiv">   <input type="text" class="othertextbox" />  </div>
-                <div id = "hiddendiv2">  <input type="text" class="othertextbox" />  </div>
-                <div id = "hiddendiv3">  <input type="text" class="othertextbox" />  </div>
-                <div id = "hiddendiv4">  <input type="text" class="othertextbox" />  </div>
+                <div id = "hiddendiv">   <label><input type="text" class="othertextbox" /></label>  </div>
+                <div id = "hiddendiv2">  <label><input type="text" class="othertextbox" /></label> </div>
+                <div id = "hiddendiv3">  <label><input type="text" class="othertextbox" /></label>  </div>
+                <div id = "hiddendiv4">  <label><input type="text" class="othertextbox" /></label>  </div>
 				<br>
 				<label style="margin-right: 2px;">Major 1</label>
 
@@ -199,7 +220,7 @@ include "header.php";
                         <?php }else { ?> <option><?php echo $majors[$i] ?> <?php } ?></option>
                     <?php } ?>
                     <option <?php if($sp_major2 === "none") { ?>  selected <?php } ?>>none</option> ?>
-                    <option value = "1" class = ".textexp" style= "width:180px"> Other </option>
+                    <option value = "1" class = ".textexp" name="major2_other" style= "width:180px"> Other </option>
                 </select>
                 <div id = "majordiv1" >  <input type="text" id="majorothertextbox" />  </div>
                 <div id = "majordiv2">  <input type="text" id="majorothertextbox2" />  </div>
@@ -214,7 +235,7 @@ include "header.php";
                         <?php }else { ?> <option><?php echo $minors[$i] ?> <?php } ?></option>
                     <?php } ?>
                     <option <?php if($sp_minor1 === "none") { ?>  selected <?php } ?>>none</option> ?>
-                    <option value = "1" class = ".textexp"> Other </option>
+                    <option value = "1" class = ".textexp" name="minor1_other"> Other </option>
                 </select>
 
 
@@ -227,7 +248,7 @@ include "header.php";
                         <?php }else { ?> <option><?php echo $minors[$i] ?> <?php } ?></option>
                     <?php } ?>
                     <option <?php if($sp_minor2 === "none") { ?>  selected <?php } ?>>none</option> ?>
-                    <option value = "1" class = ".textexp"> Other </option>
+                    <option value = "1" class = ".textexp" name="minor2_other"> Other </option>
                 </select>
                 <div id = "minordiv2">  <input type="text" id="minorothertextbox2" />  </div>
                 <div id = "minordiv1">  <input type="text" id="minorothertextbox" />  </div>
