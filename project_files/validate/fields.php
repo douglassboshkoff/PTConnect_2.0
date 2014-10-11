@@ -22,13 +22,9 @@ namespace Register {
             $this->hasError = false;
         }
 
-        public function getHTML() {
+        public function getText() {
             $message = htmlspecialchars($this->message);
-            if ($this->hasError()) {
-                return '<span class="error">' . $message . '</span>';
-            } else {
-                return '<span>' . $message . '</span>';
-            }
+            return $message;
         }
     }
 

@@ -178,7 +178,7 @@ namespace Register {
 
         public function verify($name, $password, $verify, $required = true) {
             $field = $this->fields->getField($name);
-            $this->text($name, $verify, $required, 6);
+            $this->text($name, $verify);
             if ($field->hasError()) { return; }
 
             if (strcmp($password, $verify) != 0) {

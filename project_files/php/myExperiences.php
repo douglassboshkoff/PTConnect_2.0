@@ -3,33 +3,16 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-/**
- * Created by PhpStorm.
- * User: Douglass
- * Date: 5/29/14
- * Time: 10:11 AM
- */
-//include('../validate/fields.php');
-//include('../validate/validate.php');
+
 include('../model/comments_db.php');
 include "../model/accounts_db.php";
 include('../model/experiences_db.php');
 include('../model/database.php');
 include('../model/university_db.php');
 include('../model/concentration_db.php');
-//$fields = new Register\fields();
 
+$account_id = $_SESSION['acocunt_id'];
 
-/**$fields->addField('type','You must choose your type of experience.');
-$fields->addField('title','You must choose the title of your experience.');
-$fields->addField('other','Must choose a type.');
-
-//$type = new Register\field('type','Must choose a type.');
-$title = new Register\field('title','You must choose a title for your experience.');
-$other = new Register\field('other');
-$validate = new Register\validate(); **/
-
-$account_id = $_SESSION['id'];
 if(isset($_POST['action']))
 {
     $action = $_POST['action'];

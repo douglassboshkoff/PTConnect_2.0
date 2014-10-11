@@ -11,10 +11,10 @@
             <li><span id="white">PT</span><span id="red">Connect</span></li>
             <form id="login" method="post" action="index.php">
                 <input type="hidden" name="action" value="login"/>
-                <input type="text" name="email" value="<?php if($error) { echo "Invalid user";  } ?>" <?php if($error) { ?> style="color:red" <?php  } ?>    placeholder="Email" />
+                <input type="text" name="email" placeholder="Email" />
                 <input type="password" name="password" placeholder="Password" />
                 <input id="loginButton" type="submit" value="Login"/>
-            </form
+            </form>
         </ul>
     </div>
     <div id="guestSide">
@@ -33,14 +33,22 @@
     <div id="ptcsCreate">
         <form method="post" action="index.php">
             <input name="action" type="hidden" value="register"/>
-
-            <input id="fname" name="first_name" type="text" placeholder="First Name"/>
-            <input id="lname" name="last_name" type="text" placeholder="Last Name"/>
-            <input id="email" name="email" type="text" placeholder="Email"/>
-            <input id="password" name="password" type="password" placeholder="Password"/>
-            <input id="password" name="verifypassword" type="password" placeholder="Verify Password"/>
+            <?php
+            //find errors
+            $first_name_error =  $fields->getField('first_name')->hasError();
+            $last_name_error = $fields->getField('last_name')->hasError();
+            $email_error = $fields->getField('email')->hasError();
+            $password_error = $fields->getField('password')->hasError();
+            $verify_password_error = $fields->getField('verify_password')->hasError();
+            //The purpose of the below code is to process for errors. Many of the form values are conditional upon whether errors have occured.
+            ?>
+            <input id="fname" name="first_name" type="text" style="<?php if($first_name_error){?> color:red; <?php }?>" placeholder="First Name" value="<?php if($first_name_error){ echo $fields->getField('first_name')->getText(); } else if(isset($first_name)){ echo htmlspecialchars($first_name); }?>"/>
+            <input id="lname" name="last_name" type="text" style="<?php if($last_name_error){ ?> color:red <?php }?>" placeholder="Last Name" value="<?php if($last_name_error){ echo $fields->getField('last_name')->getText();} else if(isset($last_name)){ echo htmlspecialchars($last_name); }?>"/>
+            <input id="email" name="email" type="text" style="<?php if($email_error) {?> color:red <?php }?>" placeholder="Email" value="<?php if($email_error){echo $fields->getField('email')->getText();} else if(isset($email)){ echo htmlspecialchars($email); }?>"/>
+            <input id="password" name="password" type="text" style="<?php if($password_error){?> color:red <?php } ?>" placeholder="Password" value="<?php if($password_error) { echo $fields->getField('password')->getText(); } else if(isset($password)){ echo htmlspecialchars($password); }?>"/>
+            <input id="password" name="verifypassword" type="text" style="<?php if($verify_password_error){ ?> color:red <?php } ?>" placeholder="Confirm Password" value="<?php if($verify_password_error){ echo $fields->getField('verify_password')->getText();} else if(isset($verify_password)) { echo htmlspecialchars($verify_password); }?>"/>
             <select id="gradyear" name="grad_year">
-                <option>PT Grad Year</option>
+                <option value="">- PT Grad Year -</option>
                 <option>2017</option>
                 <option>2016</option>
                 <option>2015</option>
